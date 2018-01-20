@@ -1,1 +1,4 @@
-# React_MaterialUI_TODO_MerchantApp
+# To start
+
+`yarn` or `npm install`
+`yarn start` or `npm start`
