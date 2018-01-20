@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should match mount with merchant bids 1`] = `
+<div>
+  <WithStyles(Table)>
+    <TableHead
+      component="thead"
+    >
+      <WithStyles(TableRow)>
+        <WithStyles(TableCell)>
+          Bid Id
+        </WithStyles(TableCell)>
+        <WithStyles(TableCell)
+          numeric={true}
+        >
+          Car Title
+        </WithStyles(TableCell)>
+        <WithStyles(TableCell)
+          numeric={true}
+        >
+          Amount
+        </WithStyles(TableCell)>
+        <WithStyles(TableCell)
+          numeric={true}
+        >
+          Create
+        </WithStyles(TableCell)>
+      </WithStyles(TableRow)>
+    </TableHead>
+    <TableBody
+      component="tbody"
+    >
+      <WithStyles(TableRow)
+        button={true}
+      >
+        <WithStyles(TableCell)>
+          1
+        </WithStyles(TableCell)>
+        <WithStyles(TableCell)>
+          title
+        </WithStyles(TableCell)>
+        <WithStyles(TableCell)>
+          1
+        </WithStyles(TableCell)>
+        <WithStyles(TableCell)>
+          01/01/01
+        </WithStyles(TableCell)>
+      </WithStyles(TableRow)>
+      <WithStyles(TableRow)
+        button={true}
+      >
+        <WithStyles(TableCell)>
+          2
+        </WithStyles(TableCell)>
+        <WithStyles(TableCell)>
+          title2
+        </WithStyles(TableCell)>
+        <WithStyles(TableCell)>
+          2
+        </WithStyles(TableCell)>
+        <WithStyles(TableCell)>
+          02/02/02
+        </WithStyles(TableCell)>
+      </WithStyles(TableRow)>
+    </TableBody>
+  </WithStyles(Table)>
+</div>
+`;
+
+exports[`should match shallow mount and matchsnapshot BidsDialogComponent 1`] = `
+<div>
+  No Bids
+</div>
+`;
+
+exports[`should match shallow mount with no merchant bids 1`] = `
+<div>
+  <WithStyles(Button)
+    dense={true}
+    onClick={[Function]}
+    raised={true}
+  >
+    Bids
+  </WithStyles(Button)>
+  <WithStyles(Dialog)
+    aria-labelledby="simple-dialog-title"
+    onClose={[Function]}
+    open={false}
+  >
+    <WithStyles(DialogTitle)
+      id="simple-dialog-title"
+    >
+      Bids
+    </WithStyles(DialogTitle)>
+    <BidsDialogComponentList
+      displayBids={
+        Array [
+          Object {
+            "amount": 1,
+            "carTitle": "title",
+            "created": "01/01/01",
+            "id": "1",
+          },
+          Object {
+            "amount": 2,
+            "carTitle": "title2",
+            "created": "02/02/02",
+            "id": "2",
+          },
+        ]
+      }
+    />
+  </WithStyles(Dialog)>
+</div>
+`;

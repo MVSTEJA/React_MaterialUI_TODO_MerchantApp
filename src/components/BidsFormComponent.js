@@ -84,35 +84,28 @@ class BidsFormComponent extends Component {
         noOfBids: this.props.bids ? this.props.bids.length : 0
     }
     handleBidsChange = (evt) => {
-        let array = [];
         const { value } = evt.target;
         if (value !== this.state.noOfBids) {
 
-            for (let index = 0; index < evt.target.value; index++) {
-                array[index] = {
-                    carTitle: '', amount: 0, created: '', id: ''
-                };
-            }
             this.setState(prevState => {
-                this.props.handleBidsChange(array);
+                this.props.handleBidsChange({
+                    noOfBids: value
+                });
                 return {
-                    noOfBids: evt.target.value,
+                    noOfBids: value,
                 }
             })
         }
     }
     handleBidsFormChange = (nthBid, evt) => {
         const { name, value } = evt.target;
-        const bidsList = this.props.displayBids.map((bid, key) => {
-            if (key === nthBid) {
-                bid = {
-                    ...bid,
-                    [name]: value
-                }
-            }
-            return bid;
-        })
-        this.props.handleBidsChange(bidsList);
+
+        this.props.handleBidsChange({
+            noOfBids: this.state.noOfBids,
+            propName: name,
+            propValue: value,
+            changedPropKey: nthBid
+        });
     }
     render() {
         const { classes, displayBids } = this.props;

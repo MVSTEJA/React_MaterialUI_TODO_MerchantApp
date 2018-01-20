@@ -28,6 +28,7 @@ exports[`should match snap-shot generated via enzyme 1`] = `
         "width": [Function],
       },
       "direction": "ltr",
+      "fontFamily": "Roboto, sans-serif",
       "mixins": Object {
         "gutters": [Function],
         "toolbar": Object {
@@ -99,9 +100,9 @@ exports[`should match snap-shot generated via enzyme 1`] = `
         },
         "primary": Object {
           "contrastText": "rgba(255, 255, 255, 1)",
-          "dark": "#7b1fa2",
-          "light": "#ba68c8",
-          "main": "#9c27b0",
+          "dark": "#1976d2",
+          "light": "#64b5f6",
+          "main": "#2196f3",
         },
         "secondary": Object {
           "contrastText": "rgba(0, 0, 0, 0.87)",
