@@ -10,7 +10,7 @@ import BidsDialogComponent from "./BidsDialogComponent";
 
 export default ({ classes, merchants, page, rowsPerPage, handleChangePage, handleChangeRowsPerPage, toggleEditModal, toggleDeleteModal, sortBids, displayBids }) => (
     <Table className={classes.table}>
-        <TableHead>
+        <TableHead className={classes.headerStyle}>
             <TableRow>
                 <TableCell>
                     <Typography type="body2" className={classes.title}>

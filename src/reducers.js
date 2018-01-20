@@ -1,4 +1,4 @@
-import { ADD_MERCHANT, DELETE_MERCHANT, EDIT_MERCHANT_SUBMIT, EDIT_MERCHANT, SELECT_MERCHANT, MODIFY_BIDS, SORT_BIDS } from './actions/actionTypes';
+import { ADD_MERCHANT, DELETE_MERCHANT, EDIT_MERCHANT_SUBMIT, EDIT_MERCHANT, SELECT_MERCHANT, MODIFY_BIDS, SORT_BIDS, DISPLAY_BIDS } from './actions/actionTypes';
 import { initialState } from './index';
 
 export default (state = initialState, action) => {
@@ -55,6 +55,31 @@ export default (state = initialState, action) => {
       };
     }
     case MODIFY_BIDS: {
+      const { bidFormData } = action;
+      let bidsList;
+      if (state.merchantFormData.bids.length !== bidFormData.noOfBids) {
+        for (let index = 0; index < bidFormData.noOfBids; index++) {
+          bidsList[index] = {
+            carTitle: '', amount: 0, created: '', id: ''
+          };
+        }
+      } else {
+        bidsList = [...state.merchantFormData.bids].map((bid, key) => {
+          if (key === bidFormData.changedPropKey) {
+            bid = {
+              ...bid,
+              [bidFormData.propName]: bidFormData.propValue
+            }
+          }
+          return bid;
+        });
+      }
+      return {
+        ...state,
+        displayBids: bidsList,
+      };
+    }
+    case DISPLAY_BIDS: {
       return {
         ...state,
         displayBids: action.bids,

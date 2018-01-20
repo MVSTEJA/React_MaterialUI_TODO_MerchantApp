@@ -5,7 +5,7 @@ import Paper from 'material-ui/Paper';
 import Button from "material-ui/Button";
 import { connect } from 'react-redux';
 
-import { deleteMerchant, selectMerchant, editMerchantSubmit, editMerchant, addMerchantSubmit, modifyBids, sortBids } from './../actions/merchantActions';
+import { deleteMerchant, selectMerchant, editMerchantSubmit, editMerchant, addMerchantSubmit, modifyBids, sortBids, handleDisplayBids } from './../actions/merchantActions';
 import EditMerchantDetailsModal from "./EditMerchantDetailsModal";
 import DeleteMerchantDetailsModal from "./DeleteMerchantDetailsModal";
 import MerchantTableComponent from "./MerchantTableComponent";
@@ -25,6 +25,24 @@ const styles = theme => ({
     },
     actionsTitle: {
         textAlign: 'center'
+    },
+    headerStyle: {
+        backgroundColor: theme.palette.blueGrey.light,
+    },
+    columnTitle: {
+        color: 'black'
+    },
+    demo: {
+        margin: theme.spacing.unit,
+    },
+    createMerchantSection: {
+        display: 'flex',
+        justifyContent: "space-between",
+        margin: theme.spacing.unit * 3,
+    },
+    createMerchantSectionLabel: {
+        alignSelf: 'center',
+        margin: theme.spacing.unit * 2
     }
 });
 
@@ -39,7 +57,8 @@ class MerchantTable extends React.Component {
                 Id: false,
                 IdMessage: ""
             }
-        }
+        },
+        merchantRowData: {}
     };
 
     handleCloseModal = () => {
@@ -104,7 +123,7 @@ class MerchantTable extends React.Component {
             merchantRowData: merchantFormData
         });
         this.props.selectMerchant(merchantFormData);
-        this.handleBidsChange(merchantFormData.bids || []);
+        this.props.handleDisplayBids(merchantFormData.bids || []);
     };
     toggleDeleteModal = (data, evt) => {
         this.setState({
@@ -123,8 +142,8 @@ class MerchantTable extends React.Component {
     handleChangeRowsPerPage = event => {
         this.setState({ rowsPerPage: event.target.value });
     };
-    handleBidsChange = (bids) => {
-        this.props.modifyBids(bids);
+    handleBidsChange = (bidFormData) => {
+        this.props.modifyBids(bidFormData);
     }
 
     render() {
@@ -132,37 +151,41 @@ class MerchantTable extends React.Component {
         const { page, rowsPerPage } = this.state;
 
         return (
-            <Paper className={classes.root}>
-                <label htmlFor="raised-button-file">
-                    Click here to create Merchant
+            <div>
+                <Paper className={classes.createMerchantSection}>
+                    <label className={classes.createMerchantSectionLabel} htmlFor="raised-button-file">
+                        Click on 'Create Merchant' button to add a new user to table.
+                    </label>
                     <Button raised className={classes.button} onClick={this.toggleEditModal.bind(null, null)}>
                         Create Merchant
                     </Button>
-                </label>
-                <EditMerchantDetailsModal
-                    props={this.props}
-                    state={this.state}
-                    handleEditFormSubmit={this.handleEditFormSubmit}
-                    handleCloseModal={this.handleCloseModal}
-                    handleEditFormChange={this.handleEditFormChange}
-                    handleBidsChange={this.handleBidsChange}
-                />
-                <DeleteMerchantDetailsModal
-                    state={this.state}
-                    handleDeleteModalData={this.handleDeleteModalData}
-                    handleCloseModal={this.handleCloseModal} />
-                <MerchantTableComponent
-                    classes={classes}
-                    merchants={merchants}
-                    page={page}
-                    rowsPerPage={rowsPerPage}
-                    handleChangePage={this.handleChangePage}
-                    handleChangeRowsPerPage={this.handleChangeRowsPerPage}
-                    toggleEditModal={this.toggleEditModal}
-                    toggleDeleteModal={this.toggleDeleteModal}
-                    sortBids={this.props.sortBids}
-                />
-            </Paper>
+                </Paper>
+                <Paper className={classes.root}>
+                    <EditMerchantDetailsModal
+                        props={this.props}
+                        state={this.state}
+                        handleEditFormSubmit={this.handleEditFormSubmit}
+                        handleCloseModal={this.handleCloseModal}
+                        handleEditFormChange={this.handleEditFormChange}
+                        handleBidsChange={this.handleBidsChange}
+                    />
+                    <DeleteMerchantDetailsModal
+                        state={this.state}
+                        handleDeleteModalData={this.handleDeleteModalData}
+                        handleCloseModal={this.handleCloseModal} />
+                    <MerchantTableComponent
+                        classes={classes}
+                        merchants={merchants}
+                        page={page}
+                        rowsPerPage={rowsPerPage}
+                        handleChangePage={this.handleChangePage}
+                        handleChangeRowsPerPage={this.handleChangeRowsPerPage}
+                        toggleEditModal={this.toggleEditModal}
+                        toggleDeleteModal={this.toggleDeleteModal}
+                        sortBids={this.props.sortBids}
+                    />
+                </Paper>
+            </div>
         );
     }
 }
@@ -183,7 +206,8 @@ const mapDispatchToProps = dispatch => ({
     editMerchantSubmit: (prevMerchantData) => dispatch(editMerchantSubmit(prevMerchantData)),
     editMerchant: (name, value) => dispatch(editMerchant(name, value)),
     selectMerchant: (name, value) => dispatch(selectMerchant(name, value)),
-    modifyBids: bids => dispatch(modifyBids(bids)),
+    modifyBids: bidFormData => dispatch(modifyBids(bidFormData)),
+    handleDisplayBids: bids => dispatch(handleDisplayBids(bids)),
     sortBids: bids => dispatch(sortBids(bids))
 });
 export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(MerchantTable));

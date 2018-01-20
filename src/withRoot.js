@@ -2,6 +2,7 @@ import React from 'react';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 import blue from 'material-ui/colors/blue';
 import green from 'material-ui/colors/green';
+import blueGrey from 'material-ui/colors/blueGrey';
 import Reboot from 'material-ui/Reboot';
 
 // A theme with custom primary and secondary color.
@@ -19,6 +20,11 @@ const theme = createMuiTheme({
             main: green[500],
             dark: green[700],
         },
+        blueGrey: {
+            light: blueGrey[200],
+            main: blueGrey[300],
+            dark: blueGrey[400],
+        }
     },
 });
 

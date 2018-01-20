@@ -9,18 +9,18 @@ import Dialog, { DialogTitle } from 'material-ui/Dialog';
 const BidsDialogComponentList = ({ classes, displayBids }) => (
     <div className={classes.demo}>
         <Table className={classes.table}>
-            <TableHead>
+            <TableHead className={classes.headerStyle}>
                 <TableRow>
-                    <TableCell>Bid Id</TableCell>
-                    <TableCell numeric>Car Title</TableCell>
-                    <TableCell numeric>Amount</TableCell>
-                    <TableCell numeric>Create</TableCell>
+                    <TableCell className={classes.columnTitle}>Bid Id</TableCell>
+                    <TableCell numeric className={classes.columnTitle}>Car Title</TableCell>
+                    <TableCell numeric className={classes.columnTitle}>Amount</TableCell>
+                    <TableCell numeric className={classes.columnTitle}>Create</TableCell>
                 </TableRow>
             </TableHead>
             <TableBody>
                 {
                     displayBids.map((bid, key) =>
-                        <TableRow key={key} button>
+                        <TableRow key={key}>
                             <TableCell
                             >{bid.id}</TableCell>
                             <TableCell
@@ -62,7 +62,7 @@ export default class BidsDialogComponent extends React.Component {
                         Bids
                     </Button>
                     <Dialog onClose={this.handleClickBidsClose} open={this.state.openBidsDialog} aria-labelledby="simple-dialog-title">
-                        <DialogTitle id="simple-dialog-title">Bids</DialogTitle>
+                        <DialogTitle id="simple-dialog-title">{`Bids by ${merchant.firstName} ${merchant.lastName}`}</DialogTitle>
                         <BidsDialogComponentList classes={classes} displayBids={this.props.displayBids || this.props.merchant.bids} />
                     </Dialog>
                 </div >
