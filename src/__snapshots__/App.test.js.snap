@@ -106,9 +106,9 @@ exports[`should match snap-shot generated via enzyme 1`] = `
         },
         "secondary": Object {
           "contrastText": "rgba(0, 0, 0, 0.87)",
-          "dark": "#388e3c",
-          "light": "#81c784",
-          "main": "#4caf50",
+          "dark": "#78909c",
+          "light": "#b0bec5",
+          "main": "#90a4ae",
         },
         "text": Object {
           "disabled": "rgba(0, 0, 0, 0.38)",

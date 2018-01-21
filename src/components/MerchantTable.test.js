@@ -113,7 +113,7 @@ it('should toggleEditModal', () => {
     const MerchantTableMounted = shallow(<MerchantTable merchantFormData={merchantFormData} merchants={merchants} store={store} />);
 
     MerchantTableMounted.dive().dive().instance().toggleEditModal('edit', event);
-    expect(store.dispatch.mock.calls.length).toEqual(2);
+    expect(store.dispatch.mock.calls.length).toEqual(1);
 });
 
 it('should toggleDeleteModal', () => {

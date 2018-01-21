@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import BidsDialogComponent from './BidsDialogComponent';
-import {  shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 
 import { initialState } from "./../index";
 
@@ -10,7 +10,10 @@ const init = () => {
     return {
         merchant: {},
         classes: {},
-        sortBids: jest.fn()
+        sortBids: jest.fn(),
+        event: {
+            preventDefault: jest.fn()
+        }
     }
 }
 it('renders without crashing', () => {
@@ -28,9 +31,9 @@ it('should shallow mount and match matchsnapshot BidsDialogComponent', () => {
 });
 
 it('should shallow mount with no merchant bids', () => {
-    const { merchant } = init();
+    const { merchant, classes } = init();
     merchant.bids = initialState.merchants[0].bids;
-    const BidsDialogComponentShallow = shallow(<BidsDialogComponent merchant={merchant} />);
+    const BidsDialogComponentShallow = shallow(<BidsDialogComponent merchant={merchant} classes={classes} />);
 
     expect(BidsDialogComponentShallow).toMatchSnapshot();
 });
@@ -47,15 +50,15 @@ it('should mount with merchant bids', () => {
 });
 
 it('should invoke handleClickBidsOpen', () => {
-    const { merchant, classes, sortBids } = init();
+    const { merchant, classes, sortBids, event } = init();
     merchant.bids = initialState.merchants[0].bids;
 
     const BidsDialogComponentShallow = shallow(
         <BidsDialogComponent merchant={merchant} classes={classes} sortBids={sortBids} />
     );
 
-    BidsDialogComponentShallow.instance().handleClickBidsOpen();
-    expect(BidsDialogComponentShallow.instance().state).toEqual({ "openBidsDialog": true });
+    BidsDialogComponentShallow.instance().handleClickBidsOpen(event);
+    expect(BidsDialogComponentShallow.instance().state).toEqual({ "openBidsDialog": true, "order": "asc", "orderBy": "amount", "sortBidLabel": "amount" });
 });
 
 it('should invoke handleClickBidsClose', () => {
@@ -67,5 +70,5 @@ it('should invoke handleClickBidsClose', () => {
     );
 
     BidsDialogComponentShallow.instance().handleClickBidsClose();
-    expect(BidsDialogComponentShallow.instance().state).toEqual({ "openBidsDialog": false });
+    expect(BidsDialogComponentShallow.instance().state).toEqual({ "openBidsDialog": false, "order": "asc", "orderBy": "amount", "sortBidLabel": "amount" });
 });

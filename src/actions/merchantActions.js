@@ -24,9 +24,10 @@ export const handleDisplayBids = bids => ({
   bids
 });
 
-export const sortBids = bids => ({
+export const sortBids = (bids, sortBidData) => ({
   type: SORT_BIDS,
-  bids
+  bids,
+  sortBidData
 });
 
 export const selectMerchant = merchantFormData => ({

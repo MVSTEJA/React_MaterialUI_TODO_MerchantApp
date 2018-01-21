@@ -4,6 +4,8 @@ import { withStyles } from 'material-ui/styles';
 import Paper from 'material-ui/Paper';
 import Button from "material-ui/Button";
 import { connect } from 'react-redux';
+import Typography from 'material-ui/Typography';
+import PersonAdd from 'material-ui-icons/PersonAdd';
 
 import { deleteMerchant, selectMerchant, editMerchantSubmit, editMerchant, addMerchantSubmit, modifyBids, sortBids, handleDisplayBids } from './../actions/merchantActions';
 import EditMerchantDetailsModal from "./EditMerchantDetailsModal";
@@ -23,11 +25,16 @@ const styles = theme => ({
     button: {
         margin: theme.spacing.unit,
     },
+    buttonIcon: {
+        height: theme.spacing.unit * 2.5,
+        width: theme.spacing.unit * 2.5,
+        margin: theme.spacing.unit / 2,
+    },
     actionsTitle: {
         textAlign: 'center'
     },
     headerStyle: {
-        backgroundColor: theme.palette.blueGrey.light,
+        backgroundColor: theme.palette.secondary.light,
     },
     columnTitle: {
         color: 'black'
@@ -43,6 +50,10 @@ const styles = theme => ({
     createMerchantSectionLabel: {
         alignSelf: 'center',
         margin: theme.spacing.unit * 2
+    },
+    anchorStyle: {
+        textDecoration: 'none',
+        color: theme.palette.primary.dark
     }
 });
 
@@ -116,14 +127,19 @@ class MerchantTable extends React.Component {
     toggleEditModal = (data, evt) => {
         const actionType = data ? 'edit' : 'create';
         const merchantFormData = data ? data : initialState.merchantFormData;
+        let { bids } = merchantFormData;
+        let merchantRowData = { ...merchantFormData };
+        if (!bids || bids.length === 0) {
 
+            bids = [initialState.bidData]
+            merchantRowData.bids = bids;
+        }
         this.setState({
             openEditModal: true,
             actionType,
-            merchantRowData: merchantFormData
+            merchantRowData
         });
-        this.props.selectMerchant(merchantFormData);
-        this.props.handleDisplayBids(merchantFormData.bids || []);
+        this.props.selectMerchant(merchantRowData);
     };
     toggleDeleteModal = (data, evt) => {
         this.setState({
@@ -154,10 +170,13 @@ class MerchantTable extends React.Component {
             <div>
                 <Paper className={classes.createMerchantSection}>
                     <label className={classes.createMerchantSectionLabel} htmlFor="raised-button-file">
-                        Click on 'Create Merchant' button to add a new user to table.
+                        <Typography>
+                            {`Click on 'Create Merchant' button to add a new user to table.`}
+                        </Typography>
                     </label>
                     <Button raised className={classes.button} onClick={this.toggleEditModal.bind(null, null)}>
-                        Create Merchant
+                        <Typography>Create Merchant</Typography>
+                        <PersonAdd className={classes.buttonIcon} />
                     </Button>
                 </Paper>
                 <Paper className={classes.root}>
@@ -183,6 +202,7 @@ class MerchantTable extends React.Component {
                         toggleEditModal={this.toggleEditModal}
                         toggleDeleteModal={this.toggleDeleteModal}
                         sortBids={this.props.sortBids}
+                        displayBids={this.props.displayBids}
                     />
                 </Paper>
             </div>
@@ -208,6 +228,6 @@ const mapDispatchToProps = dispatch => ({
     selectMerchant: (name, value) => dispatch(selectMerchant(name, value)),
     modifyBids: bidFormData => dispatch(modifyBids(bidFormData)),
     handleDisplayBids: bids => dispatch(handleDisplayBids(bids)),
-    sortBids: bids => dispatch(sortBids(bids))
+    sortBids: (bids, sortBidData) => dispatch(sortBids(bids, sortBidData))
 });
 export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(MerchantTable));

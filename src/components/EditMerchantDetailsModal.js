@@ -36,10 +36,10 @@ const styles = theme => {
 };
 
 const EditMerchantDetailsModal = ({ props, state, handleEditFormSubmit, handleEditFormChange, handleCloseModal, handleBidsChange, classes }) => {
-    const { merchantFormData, displayBids } = props;
-    const { firstName, lastName, email, phone, id, hasPremium, bids } = merchantFormData;
+    const { merchantFormData } = props;
+    const { firstName, lastName, email, phone, id, hasPremium, bids, displayBids } = merchantFormData;
     const { openEditModal, actionType, error } = state;
-
+    
     return (
         <Dialog open={openEditModal} onClose={handleCloseModal}>
             <form className={classes.container} onSubmit={handleEditFormSubmit.bind(null, actionType)} noValidate autoComplete="off">
@@ -101,7 +101,7 @@ const EditMerchantDetailsModal = ({ props, state, handleEditFormSubmit, handleEd
                         }
                         label="Has Premium ?"
                     />
-                    <BidsFormComponent handleBidsChange={handleBidsChange} displayBids={displayBids} bids={bids} />
+                    <BidsFormComponent handleBidsChange={handleBidsChange} actionType={actionType} bids={bids} />
                 </DialogContent>
                 <DialogActions>
                     <label htmlFor="raised-button-file">

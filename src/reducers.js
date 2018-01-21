@@ -8,7 +8,8 @@ export default (state = initialState, action) => {
         ...state,
         merchants: [...state.merchants, {
           ...state.merchantFormData,
-          bids: state.displayBids
+          bids: state.merchantFormData.bids,
+          displayBids: state.merchantFormData.bids
         }]
       };
     }
@@ -27,7 +28,6 @@ export default (state = initialState, action) => {
             ...merchant,
             ...state.merchantFormData
           })
-          merchant.bids = state.displayBids ? state.displayBids : merchant.bids
         }
         return merchant;
       });
@@ -56,19 +56,26 @@ export default (state = initialState, action) => {
     }
     case MODIFY_BIDS: {
       const { bidFormData } = action;
-      let bidsList;
-      if (state.merchantFormData.bids.length !== bidFormData.noOfBids) {
-        for (let index = 0; index < bidFormData.noOfBids; index++) {
-          bidsList[index] = {
-            carTitle: '', amount: 0, created: '', id: ''
-          };
+      let bidsList = [];
+      const { bids } = state.merchantFormData;
+      if (bids.length !== bidFormData.noOfBids) {
+        if (bids.length < bidFormData.noOfBids) {
+          bidsList = [...bids];
+          bidsList.push({
+            carTitle: '', amount: null, created: '', id: '',
+          });
+        } else {
+          bidsList = [...bids];
+          bidsList.splice(bidFormData.changedPropKey, 1);
         }
       } else {
         bidsList = [...state.merchantFormData.bids].map((bid, key) => {
           if (key === bidFormData.changedPropKey) {
+
+            const propValue = bidFormData.propName === 'amount' ? Number(bidFormData.propValue) : bidFormData.propValue;
             bid = {
               ...bid,
-              [bidFormData.propName]: bidFormData.propValue
+              [bidFormData.propName]: propValue,
             }
           }
           return bid;
@@ -76,7 +83,10 @@ export default (state = initialState, action) => {
       }
       return {
         ...state,
-        displayBids: bidsList,
+        merchantFormData: {
+          ...state.merchantFormData,
+          bids: bidsList,
+        }
       };
     }
     case DISPLAY_BIDS: {
@@ -86,20 +96,20 @@ export default (state = initialState, action) => {
       };
     }
     case SORT_BIDS: {
-      const { bids } = action;
+      const { bids, sortBidData } = action;
 
-      [...bids].sort((bid1, bid2) => {
-        if (bid1.amount < bid2.amount) {
-          return -1;
+      const displayBids = [...bids].sort((bid1, bid2) => {
+        if (bid1[sortBidData.sortBidLabel] < bid2[sortBidData.sortBidLabel]) {
+          return sortBidData.order === 'asc' ? -1 : 1;
         }
-        if (bid1.amount > bid2.amount) {
-          return 1;
+        if (bid1[sortBidData.sortBidLabel] > bid2[sortBidData.sortBidLabel]) {
+          return sortBidData.order === 'desc' ? 1 : -1;
         }
         return 0;
       })
       return {
         ...state,
-        displayBids: bids,
+        displayBids,
       };
     }
     default:

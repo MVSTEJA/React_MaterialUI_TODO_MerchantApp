@@ -4,6 +4,12 @@ import PropTypes from 'prop-types';
 import TextField from "material-ui/TextField";
 import { withStyles } from 'material-ui/styles';
 import MenuItem from 'material-ui/Menu/MenuItem';
+import IconButton from 'material-ui/IconButton';
+import DeleteIcon from 'material-ui-icons/Delete';
+import AddCircle from 'material-ui-icons/AddCircle';
+import {
+    DialogContentText,
+} from 'material-ui/Dialog';
 
 const styles = theme => {
     return ({
@@ -32,7 +38,7 @@ const styles = theme => {
     })
 };
 
-const generate = (bidsList, classes, handleBidsFormChange) => {
+const generate = (bidsList, classes, handleBidsFormChange, handleBidsRowChange, actionType) => {
     return bidsList.map((bid, key) =>
         <div key={key}>
             <TextField
@@ -75,6 +81,20 @@ const generate = (bidsList, classes, handleBidsFormChange) => {
                 onChange={handleBidsFormChange.bind(null, key)}
                 className={classes.textInput}
             />
+            {(bidsList.length - 1 === key) && <IconButton
+                className={classes.button}
+                aria-label="Create Bid"
+                onClick={handleBidsRowChange.bind(null, bid, 'add')}
+            >
+                <AddCircle />
+            </IconButton>}
+            {(bidsList.length - 1 > 0) && <IconButton
+                className={classes.button}
+                aria-label="Delete Bid"
+                onClick={handleBidsRowChange.bind(null, bid, 'delete', key)}
+            >
+                <DeleteIcon color="error" />
+            </IconButton>}
         </div>
     );
 }
@@ -90,11 +110,34 @@ class BidsFormComponent extends Component {
             this.setState(prevState => {
                 this.props.handleBidsChange({
                     noOfBids: value
+
                 });
                 return {
                     noOfBids: value,
                 }
             })
+        }
+    }
+    handleBidsRowChange = (bid, actionName, nthBid, evt) => {
+        if (actionName === 'delete' && this.state.noOfBids >= 1) {
+            this.setState(prevState => {
+                this.props.handleBidsChange({
+                    noOfBids: this.state.noOfBids - 1,
+                    changedPropKey: nthBid
+                });
+                return {
+                    noOfBids: this.state.noOfBids - 1
+                }
+            });
+        } else {
+            this.setState(prevState => {
+                this.props.handleBidsChange({
+                    noOfBids: this.state.noOfBids + 1
+                });
+                return {
+                    noOfBids: this.state.noOfBids + 1
+                }
+            });
         }
     }
     handleBidsFormChange = (nthBid, evt) => {
@@ -108,31 +151,12 @@ class BidsFormComponent extends Component {
         });
     }
     render() {
-        const { classes, displayBids } = this.props;
+        const { classes, bids, actionType } = this.props;
         return (
             <div>
-                <TextField
-                    id="select-currency"
-                    select
-                    label="Select"
-                    className={classes.textField}
-                    onChange={this.handleBidsChange}
-                    value={this.state.noOfBids}
-                    SelectProps={{
-                        MenuProps: {
-                            className: classes.menu,
-                        },
-                    }}
-                    helperText="Please select number of bids"
-                    margin="dense"
-                >
-                    {[0, 1, 2, 3, 4, 5].map(option => (
-                        <MenuItem key={option} value={option}>
-                            {option}
-                        </MenuItem>
-                    ))}
-                </TextField>
-                {generate(displayBids, classes, this.handleBidsFormChange)}
+                <br />
+                <DialogContentText className={classes.textField}>Enter your bids </DialogContentText>
+                {generate(bids, classes, this.handleBidsFormChange, this.handleBidsRowChange, actionType)}
             </div >
         );
     }

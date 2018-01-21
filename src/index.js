@@ -13,7 +13,7 @@ function createData(id, firstName, lastName, avatarUrl, email, phone, hasPremium
 const dataSet = [
   createData('0', 'test11', 'test12', 'www.google.com', 'test11@test.com', 1234567891, true, [{
     id: '1',
-    carTitle: 'title',
+    carTitle: 'title1',
     amount: 1,
     created: '01/01/01'
   },
@@ -36,9 +36,14 @@ const dataSet = [
 export const initialState = {
   merchants: dataSet,
   merchantFormData: {
-    firstName: '', lastName: '', avatarUrl: '', email: '', phone: '', id: '', hasPremium: false, bids: []
+    firstName: '', lastName: '', avatarUrl: '', email: '', phone: '', id: '', hasPremium: false, bids: [], displayBids: [],
   },
-  displayBids: []
+  bidData: {
+    id: '',
+    carTitle: '',
+    amount: null,
+    created: ''
+  }
 
 }
 const store = configureStore(initialState);
