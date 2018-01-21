@@ -21,9 +21,8 @@ const Constants = {
     HASPREMIUM: 'Has Premium?',
     ACTIONS: 'Actions',
     BIDS: 'Bids',
-    CREATE_MERCHANT_INFO: `Click on 'Create Merchant' button to add a new user to table.`,
-    MERCHANT_LIST_TABLE: 'Merchant List Table.',
-    CREATE_MERCHANT: 'Create Merchant'
+    CREATE_MERCHANT_INFO: `Click on 'Create' button to add a new merchant to table.`,
+    CREATE_MERCHANT: 'Create'
 };
 
 export const CreateMerchantInfoSection = ({ classes, toggleEditModal }) => (
