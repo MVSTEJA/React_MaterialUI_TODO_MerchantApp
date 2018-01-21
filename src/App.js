@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import './App.css';
 import withRoot from './withRoot';
 import Header from './components/Header';
-import MerchantTable from "./components/MerchantTable";
+import MerchantTable from "./components/Merchant/MerchantTable";
 
 const styles = theme => {
   return ({

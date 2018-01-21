@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import BidsDialogComponent from './BidsDialogComponent';
 import { shallow } from 'enzyme';
 
-import { initialState } from "./../index";
+import { initialState } from "./../../index";
 
 const init = () => {
 

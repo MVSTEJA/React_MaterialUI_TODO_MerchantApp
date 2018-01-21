@@ -9,7 +9,6 @@ export default (state = initialState, action) => {
         merchants: [...state.merchants, {
           ...state.merchantFormData,
           bids: state.merchantFormData.bids,
-          displayBids: state.merchantFormData.bids
         }]
       };
     }
@@ -22,15 +21,28 @@ export default (state = initialState, action) => {
     }
     case EDIT_MERCHANT_SUBMIT: {
       const { id } = state.merchantFormData;
-      const newMerchantsData = state.merchants.map((merchant) => {
+
+      const newMerchantsData = state.merchants.reduce((merchants, merchant) => {
+
         if (merchant["id"] === action.prevMerchantData.id || merchant["id"] === id) {
+
+          const { bids } = state.merchantFormData;
+          let bidsList = [];
+          bids.forEach((bid) => {
+            if (bid.id || bid.carTitle || bid.amount || bid.created) {
+              bidsList.push(bid);
+            }
+          });
           merchant = ({
             ...merchant,
-            ...state.merchantFormData
+            ...state.merchantFormData,
+            ...{
+              bids: bidsList
+            }
           })
         }
-        return merchant;
-      });
+        return merchants.concat(merchant);
+      }, []);
       return {
         ...state,
         merchants: newMerchantsData,
