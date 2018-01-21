@@ -3001,7 +3001,7 @@ exports[`should matchsnapshot of App 1`] = `
                                                         <aside
                                                           className="MuiTypography-root-65 MuiTypography-body2-73 Connect-MerchantTable--columnTitle-111"
                                                         >
-                                                          HasPremium
+                                                          Has Premium?
                                                         </aside>
                                                       </Typography>
                                                     </WithStyles(Typography)>

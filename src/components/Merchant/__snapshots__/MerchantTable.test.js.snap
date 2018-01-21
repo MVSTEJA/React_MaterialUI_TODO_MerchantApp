@@ -2732,7 +2732,7 @@ exports[`should shallow mount with no merchants bids 1`] = `
                                           <aside
                                             className="MuiTypography-root-39 MuiTypography-body2-47 Connect-MerchantTable--columnTitle-7"
                                           >
-                                            HasPremium
+                                            Has Premium?
                                           </aside>
                                         </Typography>
                                       </WithStyles(Typography)>

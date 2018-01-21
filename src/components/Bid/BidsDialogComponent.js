@@ -4,13 +4,23 @@ import Table, { TableBody, TableCell, TableHead, TableRow, TableSortLabel } from
 import Typography from 'material-ui/Typography';
 import Dialog, { DialogTitle } from 'material-ui/Dialog';
 
+const Constants = {
+    BID_ID: 'Bid Id',
+    CAR_TITLE: 'Car Title',
+    AMOUNT: 'Amount',
+    CREATED: 'Created',
+    NO_BIDS: 'No Bids'
+}
+/**
+ * @description: A Component for BidsDialog List. 
+ */
 const BidsDialogComponentList = ({ classes, displayBids, orderBy, order, handleHeaderSort }) => (
     <div className={classes.demo}>
         <Table className={classes.table}>
             <TableHead className={classes.headerStyle}>
                 <TableRow>
-                    <TableCell className={classes.columnTitle}>Bid Id</TableCell>
-                    <TableCell numeric className={classes.columnTitle}>Car Title</TableCell>
+                    <TableCell className={classes.columnTitle}>{Constants.BID_ID}</TableCell>
+                    <TableCell numeric className={classes.columnTitle}>{Constants.CAR_TITLE}</TableCell>
                     <TableCell
                         numeric
                         className={classes.columnTitle}
@@ -22,7 +32,7 @@ const BidsDialogComponentList = ({ classes, displayBids, orderBy, order, handleH
                             className={classes.columnTitle}
                             onClick={handleHeaderSort.bind(null, 'amount', order)}
                         >
-                            Amount
+                            {Constants.AMOUNT}
                         </TableSortLabel>
                     </TableCell>
                     <TableCell
@@ -36,27 +46,27 @@ const BidsDialogComponentList = ({ classes, displayBids, orderBy, order, handleH
                             className={classes.columnTitle}
                             onClick={handleHeaderSort.bind(null, 'created', order)}
                         >
-                            Created
+                            {Constants.CREATED}
                         </TableSortLabel>
                     </TableCell>
                 </TableRow>
             </TableHead>
-        <TableBody>
-            {
-                displayBids.map((bid, key) =>
-                    <TableRow key={key}>
-                        <TableCell
-                        >{bid.id}</TableCell>
-                        <TableCell
-                        >{bid.carTitle}</TableCell>
-                        <TableCell
-                        >{bid.amount}</TableCell>
-                        <TableCell
-                        >{bid.created}</TableCell>
-                    </TableRow>
-                )
-            }
-        </TableBody>
+            <TableBody>
+                {
+                    displayBids.map((bid, key) =>
+                        <TableRow key={key}>
+                            <TableCell
+                            >{bid.id}</TableCell>
+                            <TableCell
+                            >{bid.carTitle}</TableCell>
+                            <TableCell
+                            >{bid.amount}</TableCell>
+                            <TableCell
+                            >{bid.created}</TableCell>
+                        </TableRow>
+                    )
+                }
+            </TableBody>
         </Table>
     </div >
 );
@@ -129,7 +139,7 @@ export default class BidsDialogComponent extends React.Component {
                 </div >
             )
         } else {
-            return <div>No Bids</div>
+            return <div>{Constants.NO_BIDS}</div>
         }
 
     }

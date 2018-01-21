@@ -2,15 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Paper from 'material-ui/Paper';
-import Button from "material-ui/Button";
 import { connect } from 'react-redux';
 import Typography from 'material-ui/Typography';
-import PersonAdd from 'material-ui-icons/PersonAdd';
 
 import { deleteMerchant, selectMerchant, editMerchantSubmit, editMerchant, addMerchantSubmit, modifyBids, sortBids, handleDisplayBids } from './../../actions/merchantActions';
 import EditMerchantDetailsModal from "./EditMerchantDetailsModal";
 import DeleteMerchantDetailsModal from "./DeleteMerchantDetailsModal";
-import MerchantTableComponent from "./MerchantTableComponent";
+import MerchantTableComponent, { CreateMerchantInfoSection } from "./MerchantTableComponent";
 
 import { initialState } from "./../../index";
 const styles = theme => ({
@@ -64,6 +62,13 @@ const baseErrorObject = {
     }
 };
 
+const Constants = {
+    MERCHANT_LIST_TABLE: 'Merchant List Table',
+};
+
+/**
+ * @description: Merchant Table Container Component.
+ */
 class MerchantTable extends React.Component {
     state = {
         openEditModal: false,
@@ -171,17 +176,10 @@ class MerchantTable extends React.Component {
 
         return (
             <div>
-                <Paper className={classes.createMerchantSection}>
-                    <label className={classes.createMerchantSectionLabel} htmlFor="raised-button-file">
-                        <Typography>
-                            {`Click on 'Create Merchant' button to add a new user to table.`}
-                        </Typography>
-                    </label>
-                    <Button dense raised className={classes.button} onClick={this.toggleEditModal.bind(null, null)}>
-                        <Typography>Create Merchant</Typography>
-                        <PersonAdd className={classes.buttonIcon} />
-                    </Button>
-                </Paper>
+                <CreateMerchantInfoSection
+                    classes={classes}
+                    toggleEditModal={this.toggleEditModal}
+                />
                 <Paper className={classes.root}>
                     <EditMerchantDetailsModal
                         props={this.props}
@@ -196,7 +194,7 @@ class MerchantTable extends React.Component {
                         handleDeleteModalData={this.handleDeleteModalData}
                         handleCloseModal={this.handleCloseModal} />
                     <Typography type="display1" className={classes.button}>
-                        {`Merchant List Table.`}
+                        {Constants.MERCHANT_LIST_TABLE}
                     </Typography>
                     <MerchantTableComponent
                         classes={classes}

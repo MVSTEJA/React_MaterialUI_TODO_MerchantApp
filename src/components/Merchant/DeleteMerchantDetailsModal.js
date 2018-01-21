@@ -8,21 +8,32 @@ import Dialog, {
     DialogActions,
 } from 'material-ui/Dialog';
 
+const Constants = {
+    DELETE_MERCHANT_DETAILS: "Delete Merchant Details",
+    DELETE_CONFIRMATION: 'Are you sure you want to delete this merchant?',
+    OK: 'Ok',
+    CANCEL: 'Cancel'
+}
+
+/**
+ * @description: DeleteMerchantDetails Modal Component.
+ *  
+ */
 const DeleteMerchantDetailsModal = ({ state, handleDeleteModalData, handleCloseModal }) => {
     const { openDeleteModal } = state;
 
     return (
         <Dialog open={openDeleteModal} onClose={handleCloseModal}>
-            <DialogTitle>Delete Merchant Details</DialogTitle>
+            <DialogTitle>{Constants.DELETE_MERCHANT_DETAILS}</DialogTitle>
             <DialogContent>
-                <DialogContentText>Are you sure you want to delete this merchant ?</DialogContentText>
+                <DialogContentText>{Constants.DELETE_CONFIRMATION}</DialogContentText>
             </DialogContent>
             <DialogActions>
                 <Button color="primary" onClick={handleDeleteModalData}>
-                    OK
+                    {Constants.OK}
                 </Button>
                 <Button color="default" onClick={handleCloseModal}>
-                    Cancel
+                    {Constants.CANCEL}
                 </Button>
             </DialogActions>
         </Dialog>

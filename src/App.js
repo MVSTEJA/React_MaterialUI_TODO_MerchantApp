@@ -24,6 +24,9 @@ const styles = theme => {
   })
 };
 
+/**
+ * @description: Base Component
+ */
 class App extends Component {
   render() {
     const { classes } = this.props;

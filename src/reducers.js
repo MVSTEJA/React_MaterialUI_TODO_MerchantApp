@@ -1,14 +1,26 @@
 import { ADD_MERCHANT, DELETE_MERCHANT, EDIT_MERCHANT_SUBMIT, EDIT_MERCHANT, SELECT_MERCHANT, MODIFY_BIDS, SORT_BIDS, DISPLAY_BIDS } from './actions/actionTypes';
 import { initialState } from './index';
 
+const checkEmptyBids = (state) => {
+  const { bids } = state.merchantFormData;
+  let bidsList = [];
+  bids.forEach((bid) => {
+    if (bid.id || bid.carTitle || bid.amount || bid.created) {
+      bidsList.push(bid);
+    }
+  });
+  return bidsList;
+};
+
 export default (state = initialState, action) => {
   switch (action.type) {
     case ADD_MERCHANT: {
+
       return {
         ...state,
         merchants: [...state.merchants, {
           ...state.merchantFormData,
-          bids: state.merchantFormData.bids,
+          bids: checkEmptyBids(state),
         }]
       };
     }
@@ -25,19 +37,11 @@ export default (state = initialState, action) => {
       const newMerchantsData = state.merchants.reduce((merchants, merchant) => {
 
         if (merchant["id"] === action.prevMerchantData.id || merchant["id"] === id) {
-
-          const { bids } = state.merchantFormData;
-          let bidsList = [];
-          bids.forEach((bid) => {
-            if (bid.id || bid.carTitle || bid.amount || bid.created) {
-              bidsList.push(bid);
-            }
-          });
           merchant = ({
             ...merchant,
             ...state.merchantFormData,
             ...{
-              bids: bidsList
+              bids: checkEmptyBids(state)
             }
           })
         }

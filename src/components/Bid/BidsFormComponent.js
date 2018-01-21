@@ -37,6 +37,10 @@ const styles = theme => {
     })
 };
 
+const Constants = {
+    ENTER_BIDS: 'Enter your bids'
+};
+
 const generate = (bidsList, classes, handleBidsFormChange, handleBidsRowChange) => {
     return bidsList.map((bid, key) =>
         <div key={key}>
@@ -98,6 +102,9 @@ const generate = (bidsList, classes, handleBidsFormChange, handleBidsRowChange) 
     );
 }
 
+/**
+ * @description: A Form Component for Editing/Creating Bids.
+ */
 class BidsFormComponent extends Component {
     state = {
         noOfBids: this.props.bids ? this.props.bids.length : 0
@@ -139,7 +146,7 @@ class BidsFormComponent extends Component {
         return (
             <div>
                 <br />
-                <DialogContentText className={classes.textField}>Enter your bids </DialogContentText>
+                <DialogContentText className={classes.textField}>{Constants.ENTER_BIDS}</DialogContentText>
                 {generate(bids, classes, this.handleBidsFormChange, this.handleBidsRowChange, actionType)}
             </div >
         );

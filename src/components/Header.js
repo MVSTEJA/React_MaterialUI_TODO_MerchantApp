@@ -9,6 +9,14 @@ import MenuIcon from 'material-ui-icons/Menu';
 
 import logo from './../logo.png';
 
+const Constants = {
+    LOGIN: 'Login'
+}
+
+/**
+ * @description: An App Header Bar Component. 
+ *  
+ */
 const Header = ({ classes }) => (
     <AppBar position="static">
         <Toolbar>
@@ -18,7 +26,7 @@ const Header = ({ classes }) => (
             <Typography type="title" color="inherit" className={classes.flex}>
                 <img src={logo} className="App-logo" alt="logo" />
             </Typography>
-            <Button color="contrast">Login</Button>
+            <Button color="contrast">{Constants.LOGIN}</Button>
         </Toolbar>
     </AppBar>
 );

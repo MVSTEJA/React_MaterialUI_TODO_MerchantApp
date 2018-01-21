@@ -6,51 +6,90 @@ import DeleteIcon from 'material-ui-icons/Delete';
 import EditIcon from 'material-ui-icons/Edit';
 import Typography from 'material-ui/Typography';
 import Avatar from 'material-ui/Avatar';
+import Button from "material-ui/Button";
+import PersonAdd from 'material-ui-icons/PersonAdd';
+import Paper from 'material-ui/Paper';
 
 import BidsDialogComponent from "./../Bid/BidsDialogComponent";
 
+const Constants = {
+    MERCHANT_NAME: "Merchant Name",
+    ID: 'ID',
+    AVATAR: 'Avatar',
+    EMAIL: 'Email',
+    PHONE: 'Phone',
+    HASPREMIUM: 'Has Premium?',
+    ACTIONS: 'Actions',
+    BIDS: 'Bids',
+    CREATE_MERCHANT_INFO: `Click on 'Create Merchant' button to add a new user to table.`,
+    MERCHANT_LIST_TABLE: 'Merchant List Table.',
+    CREATE_MERCHANT: 'Create Merchant'
+};
+
+export const CreateMerchantInfoSection = ({ classes, toggleEditModal }) => (
+    <Paper className={classes.createMerchantSection} >
+        <label className={classes.createMerchantSectionLabel} htmlFor="raised-button-file">
+            <Typography>
+                {Constants.CREATE_MERCHANT_INFO}
+            </Typography>
+        </label>
+        <Button dense raised className={classes.button} onClick={toggleEditModal.bind(null, null)}>
+            <Typography>{Constants.CREATE_MERCHANT}</Typography>
+            <PersonAdd className={classes.buttonIcon} />
+        </Button>
+    </Paper >
+);
+
+CreateMerchantInfoSection.propTypes = {
+    classes: PropTypes.object.isRequired,
+    toggleEditModal: PropTypes.func
+}
+/**
+ * @description: Merchant Table Layout Component.
+ *  
+ */
 const MerchantTableComponent = ({ classes, merchants, page, rowsPerPage, handleChangePage, handleChangeRowsPerPage, toggleEditModal, toggleDeleteModal, sortBids, displayBids }) => (
     <Table className={classes.table}>
         <TableHead className={classes.headerStyle}>
             <TableRow>
                 <TableCell>
                     <Typography type="body2" className={classes.columnTitle}>
-                        Merchant Name
+                        {Constants.MERCHANT_NAME}
                     </Typography>
                 </TableCell>
                 <TableCell numeric>
                     <Typography type="body2" className={classes.columnTitle}>
-                        ID
+                        {Constants.ID}
                     </Typography>
                 </TableCell>
                 <TableCell numeric>
                     <Typography type="body2" className={classes.columnTitle}>
-                        Avatar
+                        {Constants.AVATAR}
                     </Typography>
                 </TableCell>
                 <TableCell numeric>
                     <Typography type="body2" className={classes.columnTitle}>
-                        Email
+                        {Constants.EMAIL}
                     </Typography>
                 </TableCell>
                 <TableCell numeric>
                     <Typography type="body2" className={classes.columnTitle}>
-                        Phone
+                        {Constants.PHONE}
                     </Typography>
                 </TableCell>
                 <TableCell numeric>
                     <Typography type="body2" className={classes.columnTitle}>
-                        HasPremium
+                        {Constants.HASPREMIUM}
                     </Typography>
                 </TableCell>
                 <TableCell numeric>
                     <Typography type="body2" className={classes.columnTitle}>
-                        Bids
+                        {Constants.BIDS}
                     </Typography>
                 </TableCell>
                 <TableCell className={classes.actionsTitle}>
                     <Typography type="body2" className={classes.columnTitle}>
-                        Actions
+                        {Constants.ACTIONS}
                     </Typography>
                 </TableCell>
             </TableRow>

@@ -39,6 +39,16 @@ const styles = theme => {
     })
 };
 
+const Constants = {
+    MERCHANT_DETAILS_LABEL: 'Merchant Details',
+    MERCHANT_DETAILS_INFORMATION_LABEL: 'Merchant Details such as Email, First Name, Last Name, Phone Number, Avatar, HasPremium and ID.',
+    SAVE: 'Save',
+    CANCEL: 'Cancel'
+}
+/**
+ * @description: EditMerchantDetails Modal Component. 
+ *  
+ */
 const EditMerchantDetailsModal = ({ props, state, handleEditFormSubmit, handleEditFormChange, handleCloseModal, handleBidsChange, classes }) => {
     const { merchantFormData } = props;
     const { firstName, lastName, email, phone, id, hasPremium, avatarUrl, bids } = merchantFormData;
@@ -47,9 +57,9 @@ const EditMerchantDetailsModal = ({ props, state, handleEditFormSubmit, handleEd
     return (
         <Dialog open={openEditModal} onClose={handleCloseModal}>
             <form className={classes.container} onSubmit={handleEditFormSubmit.bind(null, actionType)} noValidate autoComplete="off">
-                <DialogTitle>{`${actionType === 'edit' ? 'Edit' : 'Create'} Merchant Details`}</DialogTitle>
+                <DialogTitle>{`${actionType === 'edit' ? 'Edit' : 'Create'} ${Constants.MERCHANT_DETAILS_LABEL}`}</DialogTitle>
                 <DialogContent>
-                    <DialogContentText>Edit Merchant Details such as Email, First Name, Last Name and Phone Number</DialogContentText>
+                    <DialogContentText>{`${actionType === 'edit' ? 'Edit' : 'Create'} ${Constants.MERCHANT_DETAILS_INFORMATION_LABEL}`}</DialogContentText>
                     <TextField
                         margin="normal"
                         id="fist-name"
@@ -122,12 +132,12 @@ const EditMerchantDetailsModal = ({ props, state, handleEditFormSubmit, handleEd
                 <DialogActions>
                     <label htmlFor="raised-button-file">
                         <Button raised type="submit" className={classes.button}>
-                            Save
+                            {Constants.SAVE}
                         </Button>
                     </label>
                     <label htmlFor="raised-button-file">
                         <Button raised onClick={handleCloseModal} className={classes.button}>
-                            Cancel
+                            {Constants.CANCEL}
                         </Button>
                     </label>
                 </DialogActions>
