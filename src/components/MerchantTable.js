@@ -124,7 +124,7 @@ class MerchantTable extends React.Component {
         this.handleCloseModal();
 
     }
-    toggleEditModal = (data, evt) => {
+    toggleEditModal = (data) => {
         const actionType = data ? 'edit' : 'create';
         const merchantFormData = data ? data : initialState.merchantFormData;
         let { bids } = merchantFormData;
@@ -141,13 +141,13 @@ class MerchantTable extends React.Component {
         });
         this.props.selectMerchant(merchantRowData);
     };
-    toggleDeleteModal = (data, evt) => {
+    toggleDeleteModal = (data) => {
         this.setState({
             openDeleteModal: true,
         })
         this.props.selectMerchant(data);
     };
-    handleDeleteModalData = (evt) => {
+    handleDeleteModalData = () => {
         this.props.deleteMerchant();
         this.handleCloseModal();
     };
@@ -212,12 +212,22 @@ class MerchantTable extends React.Component {
 
 MerchantTable.propTypes = {
     classes: PropTypes.object.isRequired,
+    editMerchant: PropTypes.func,
+    merchantFormData: PropTypes.object,
+    merchants: PropTypes.array,
+    editMerchantSubmit: PropTypes.func,
+    addMerchantSubmit: PropTypes.func,
+    selectMerchant: PropTypes.func,
+    deleteMerchant: PropTypes.func,
+    modifyBids: PropTypes.func,
+    sortBids: PropTypes.func,
+    displayBids: PropTypes.array
 };
 
 const mapStateToProps = state => ({
     merchants: state.merchants,
     merchantFormData: state.merchantFormData,
-    displayBids: state.displayBids
+    displayBids: state.displayBids,
 });
 
 const mapDispatchToProps = dispatch => ({

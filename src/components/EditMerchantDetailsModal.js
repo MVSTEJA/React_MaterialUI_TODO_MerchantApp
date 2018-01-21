@@ -10,10 +10,9 @@ import Dialog, {
 } from 'material-ui/Dialog';
 import { withStyles } from 'material-ui/styles';
 import BidsFormComponent from "./BidsFormComponent";
-import { FormControlLabel } from 'material-ui/Form';
+import { FormControl, FormHelperText, FormControlLabel } from 'material-ui/Form';
 import Checkbox from 'material-ui/Checkbox';
 import Input, { InputLabel } from 'material-ui/Input';
-import { FormControl, FormHelperText } from 'material-ui/Form';
 
 const styles = theme => {
     return ({
@@ -37,9 +36,9 @@ const styles = theme => {
 
 const EditMerchantDetailsModal = ({ props, state, handleEditFormSubmit, handleEditFormChange, handleCloseModal, handleBidsChange, classes }) => {
     const { merchantFormData } = props;
-    const { firstName, lastName, email, phone, id, hasPremium, bids, displayBids } = merchantFormData;
+    const { firstName, lastName, email, phone, id, hasPremium, bids } = merchantFormData;
     const { openEditModal, actionType, error } = state;
-    
+
     return (
         <Dialog open={openEditModal} onClose={handleCloseModal}>
             <form className={classes.container} onSubmit={handleEditFormSubmit.bind(null, actionType)} noValidate autoComplete="off">
@@ -119,5 +118,16 @@ const EditMerchantDetailsModal = ({ props, state, handleEditFormSubmit, handleEd
         </Dialog>
     );
 }
+
+EditMerchantDetailsModal.propTypes = {
+    classes: PropTypes.object.isRequired,
+    props: PropTypes.object,
+    state: PropTypes.object,
+    handleEditFormChange: PropTypes.func,
+    handleEditFormSubmit: PropTypes.func,
+    handleBidsChange: PropTypes.func,
+    handleCloseModal: PropTypes.func,
+    merchantFormData: PropTypes.object
+};
 
 export default withStyles(styles)(EditMerchantDetailsModal);

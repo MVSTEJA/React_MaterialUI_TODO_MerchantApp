@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { withStyles } from 'material-ui/styles';
-import Button from "material-ui/Button";
 
 import './App.css';
 import withRoot from './withRoot';

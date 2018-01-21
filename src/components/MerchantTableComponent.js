@@ -1,5 +1,5 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 import Table, { TableBody, TableCell, TableHead, TableRow, TableFooter, TablePagination } from 'material-ui/Table';
 import IconButton from 'material-ui/IconButton';
 import DeleteIcon from 'material-ui-icons/Delete';
@@ -8,7 +8,7 @@ import Typography from 'material-ui/Typography';
 
 import BidsDialogComponent from "./BidsDialogComponent";
 
-export default ({ classes, merchants, page, rowsPerPage, handleChangePage, handleChangeRowsPerPage, toggleEditModal, toggleDeleteModal, sortBids, displayBids }) => (
+const MerchantTableComponent = ({ classes, merchants, page, rowsPerPage, handleChangePage, handleChangeRowsPerPage, toggleEditModal, toggleDeleteModal, sortBids, displayBids }) => (
     <Table className={classes.table}>
         <TableHead className={classes.headerStyle}>
             <TableRow>
@@ -65,7 +65,7 @@ export default ({ classes, merchants, page, rowsPerPage, handleChangePage, handl
                         <TableCell numeric>{merchant.phone}</TableCell>
                         <TableCell numeric>{merchant.hasPremium ? 'Yes' : 'No'}</TableCell>
                         <TableCell numeric>
-                            <BidsDialogComponent classes={classes} merchant={merchant} sortBids={sortBids} displayBids={displayBids}/>
+                            <BidsDialogComponent classes={classes} merchant={merchant} sortBids={sortBids} displayBids={displayBids} />
                         </TableCell>
                         <TableCell numeric>
                             <IconButton
@@ -104,4 +104,19 @@ export default ({ classes, merchants, page, rowsPerPage, handleChangePage, handl
             </TableRow>
         </TableFooter>
     </Table>
-)
+);
+
+MerchantTableComponent.propTypes = {
+    classes: PropTypes.object.isRequired,
+    merchants: PropTypes.array,
+    page: PropTypes.number,
+    handleChangePage: PropTypes.func,
+    handleChangeRowsPerPage: PropTypes.func,
+    toggleDeleteModal: PropTypes.func,
+    toggleEditModal: PropTypes.func,
+    rowsPerPage: PropTypes.number,
+    sortBids: PropTypes.func,
+    displayBids: PropTypes.array,
+};
+
+export default MerchantTableComponent;

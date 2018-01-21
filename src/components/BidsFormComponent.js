@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import TextField from "material-ui/TextField";
 import { withStyles } from 'material-ui/styles';
-import MenuItem from 'material-ui/Menu/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import DeleteIcon from 'material-ui-icons/Delete';
 import AddCircle from 'material-ui-icons/AddCircle';
@@ -38,7 +37,7 @@ const styles = theme => {
     })
 };
 
-const generate = (bidsList, classes, handleBidsFormChange, handleBidsRowChange, actionType) => {
+const generate = (bidsList, classes, handleBidsFormChange, handleBidsRowChange) => {
     return bidsList.map((bid, key) =>
         <div key={key}>
             <TextField
@@ -47,7 +46,7 @@ const generate = (bidsList, classes, handleBidsFormChange, handleBidsRowChange, 
                 label="Amount"
                 type="number"
                 name="amount"
-                value={bid.amount}
+                value={bid.amount || ''}
                 onChange={handleBidsFormChange.bind(null, key)}
                 className={classes.textInput}
             />
@@ -103,24 +102,9 @@ class BidsFormComponent extends Component {
     state = {
         noOfBids: this.props.bids ? this.props.bids.length : 0
     }
-    handleBidsChange = (evt) => {
-        const { value } = evt.target;
-        if (value !== this.state.noOfBids) {
-
-            this.setState(prevState => {
-                this.props.handleBidsChange({
-                    noOfBids: value
-
-                });
-                return {
-                    noOfBids: value,
-                }
-            })
-        }
-    }
-    handleBidsRowChange = (bid, actionName, nthBid, evt) => {
+    handleBidsRowChange = (bid, actionName, nthBid) => {
         if (actionName === 'delete' && this.state.noOfBids >= 1) {
-            this.setState(prevState => {
+            this.setState(() => {
                 this.props.handleBidsChange({
                     noOfBids: this.state.noOfBids - 1,
                     changedPropKey: nthBid
@@ -130,7 +114,7 @@ class BidsFormComponent extends Component {
                 }
             });
         } else {
-            this.setState(prevState => {
+            this.setState(() => {
                 this.props.handleBidsChange({
                     noOfBids: this.state.noOfBids + 1
                 });
@@ -163,3 +147,10 @@ class BidsFormComponent extends Component {
 }
 
 export default withStyles(styles)(BidsFormComponent);
+
+BidsFormComponent.propTypes = {
+    classes: PropTypes.object.isRequired,
+    bids: PropTypes.array,
+    handleBidsChange: PropTypes.func,
+    actionType: PropTypes.string
+};

@@ -72,3 +72,16 @@ it('should invoke handleClickBidsClose', () => {
     BidsDialogComponentShallow.instance().handleClickBidsClose();
     expect(BidsDialogComponentShallow.instance().state).toEqual({ "openBidsDialog": false, "order": "asc", "orderBy": "amount", "sortBidLabel": "amount" });
 });
+
+
+it('should invoke handleHeaderSort', () => {
+    const { merchant, classes, sortBids } = init();
+    merchant.bids = initialState.merchants[0].bids;
+
+    const BidsDialogComponentShallow = shallow(
+        <BidsDialogComponent merchant={merchant} classes={classes} sortBids={sortBids} />
+    );
+
+    BidsDialogComponentShallow.instance().handleHeaderSort('amount', 'desc');
+    expect(sortBids.mock.calls.length).toEqual(1);
+});

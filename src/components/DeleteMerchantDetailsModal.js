@@ -7,7 +7,6 @@ import Dialog, {
     DialogContentText,
     DialogActions,
 } from 'material-ui/Dialog';
-import { withStyles } from 'material-ui/styles';
 
 const DeleteMerchantDetailsModal = ({ state, handleDeleteModalData, handleCloseModal }) => {
     const { openDeleteModal } = state;
@@ -28,6 +27,12 @@ const DeleteMerchantDetailsModal = ({ state, handleDeleteModalData, handleCloseM
             </DialogActions>
         </Dialog>
     );
+}
+
+DeleteMerchantDetailsModal.propTypes = {
+    state: PropTypes.object,
+    handleDeleteModalData: PropTypes.func,
+    handleCloseModal: PropTypes.func
 }
 
 export default DeleteMerchantDetailsModal;

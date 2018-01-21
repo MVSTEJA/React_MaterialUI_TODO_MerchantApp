@@ -1,0 +1,269 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should mount with bids 1`] = `
+<div>
+  <br />
+  <WithStyles(DialogContentText)
+    className="BidsFormComponent-textField-5"
+  >
+    Enter your bids 
+  </WithStyles(DialogContentText)>
+  <div>
+    <TextField
+      className="BidsFormComponent-textInput-4"
+      id="amount"
+      label="Amount"
+      margin="normal"
+      name="amount"
+      onChange={[Function]}
+      required={false}
+      select={false}
+      type="number"
+      value={1}
+    />
+    <TextField
+      className="BidsFormComponent-textInput-4"
+      id="created"
+      label="Created"
+      margin="normal"
+      name="created"
+      onChange={[Function]}
+      required={false}
+      select={false}
+      type="text"
+      value="01/01/01"
+    />
+    <TextField
+      className="BidsFormComponent-textInput-4"
+      id="car-title"
+      label="Car Title"
+      margin="normal"
+      name="carTitle"
+      onChange={[Function]}
+      required={false}
+      select={false}
+      type="text"
+      value="title1"
+    />
+    <TextField
+      className="BidsFormComponent-textInput-4"
+      id="id"
+      label="Id"
+      margin="normal"
+      name="id"
+      onChange={[Function]}
+      required={false}
+      select={false}
+      type="text"
+      value="1"
+    />
+    <WithStyles(IconButton)
+      aria-label="Delete Bid"
+      className="BidsFormComponent-button-3"
+      onClick={[Function]}
+    >
+      <pure(Delete)
+        color="error"
+      />
+    </WithStyles(IconButton)>
+  </div>
+  <div>
+    <TextField
+      className="BidsFormComponent-textInput-4"
+      id="amount"
+      label="Amount"
+      margin="normal"
+      name="amount"
+      onChange={[Function]}
+      required={false}
+      select={false}
+      type="number"
+      value={2}
+    />
+    <TextField
+      className="BidsFormComponent-textInput-4"
+      id="created"
+      label="Created"
+      margin="normal"
+      name="created"
+      onChange={[Function]}
+      required={false}
+      select={false}
+      type="text"
+      value="02/02/02"
+    />
+    <TextField
+      className="BidsFormComponent-textInput-4"
+      id="car-title"
+      label="Car Title"
+      margin="normal"
+      name="carTitle"
+      onChange={[Function]}
+      required={false}
+      select={false}
+      type="text"
+      value="title2"
+    />
+    <TextField
+      className="BidsFormComponent-textInput-4"
+      id="id"
+      label="Id"
+      margin="normal"
+      name="id"
+      onChange={[Function]}
+      required={false}
+      select={false}
+      type="text"
+      value="2"
+    />
+    <WithStyles(IconButton)
+      aria-label="Create Bid"
+      className="BidsFormComponent-button-3"
+      onClick={[Function]}
+    >
+      <pure(AddCircle) />
+    </WithStyles(IconButton)>
+    <WithStyles(IconButton)
+      aria-label="Delete Bid"
+      className="BidsFormComponent-button-3"
+      onClick={[Function]}
+    >
+      <pure(Delete)
+        color="error"
+      />
+    </WithStyles(IconButton)>
+  </div>
+</div>
+`;
+
+exports[`should shallow mount and match matchsnapshot MerchantTable 1`] = `
+<BidsFormComponent
+  classes={
+    Object {
+      "button": "BidsFormComponent-button-3",
+      "container": "BidsFormComponent-container-2",
+      "menu": "BidsFormComponent-menu-6",
+      "root": "BidsFormComponent-root-1",
+      "textField": "BidsFormComponent-textField-5",
+      "textInput": "BidsFormComponent-textInput-4",
+    }
+  }
+  merchants={
+    Array [
+      Object {
+        "avatarUrl": "www.google.com",
+        "bids": Array [
+          Object {
+            "amount": 1,
+            "carTitle": "title1",
+            "created": "01/01/01",
+            "id": "1",
+          },
+          Object {
+            "amount": 2,
+            "carTitle": "title2",
+            "created": "02/02/02",
+            "id": "2",
+          },
+        ],
+        "email": "test11@test.com",
+        "firstName": "test11",
+        "hasPremium": true,
+        "id": "0",
+        "lastName": "test12",
+        "phone": 1234567891,
+      },
+      Object {
+        "avatarUrl": "www.google.com",
+        "bids": Array [],
+        "email": "test22@test.com",
+        "firstName": "test21",
+        "hasPremium": true,
+        "id": "1",
+        "lastName": "test22",
+        "phone": 1234567892,
+      },
+      Object {
+        "avatarUrl": "www.google.com",
+        "bids": Array [],
+        "email": "test33@test.com",
+        "firstName": "test31",
+        "hasPremium": false,
+        "id": "2",
+        "lastName": "test32",
+        "phone": 1234567893,
+      },
+      Object {
+        "avatarUrl": "www.google.com",
+        "bids": Array [],
+        "email": "test44@test.com",
+        "firstName": "test41",
+        "hasPremium": true,
+        "id": "3",
+        "lastName": "test42",
+        "phone": 1234567894,
+      },
+      Object {
+        "avatarUrl": "www.google.com",
+        "bids": Array [],
+        "email": "test55@test.com",
+        "firstName": "test51",
+        "hasPremium": false,
+        "id": "4",
+        "lastName": "test52",
+        "phone": 1234567895,
+      },
+      Object {
+        "avatarUrl": "www.google.com",
+        "bids": Array [],
+        "email": "test11@test.com",
+        "firstName": "test11",
+        "hasPremium": true,
+        "id": "5",
+        "lastName": "test12",
+        "phone": 1234567891,
+      },
+      Object {
+        "avatarUrl": "www.google.com",
+        "bids": Array [],
+        "email": "test22@test.com",
+        "firstName": "test21",
+        "hasPremium": true,
+        "id": "6",
+        "lastName": "test22",
+        "phone": 1234567892,
+      },
+      Object {
+        "avatarUrl": "www.google.com",
+        "bids": Array [],
+        "email": "test33@test.com",
+        "firstName": "test31",
+        "hasPremium": false,
+        "id": "7",
+        "lastName": "test32",
+        "phone": 1234567893,
+      },
+      Object {
+        "avatarUrl": "www.google.com",
+        "bids": Array [],
+        "email": "test44@test.com",
+        "firstName": "test41",
+        "hasPremium": true,
+        "id": "8",
+        "lastName": "test42",
+        "phone": 1234567894,
+      },
+      Object {
+        "avatarUrl": "www.google.com",
+        "bids": Array [],
+        "email": "test55@test.com",
+        "firstName": "test51",
+        "hasPremium": false,
+        "id": "9",
+        "lastName": "test52",
+        "phone": 1234567895,
+      },
+    ]
+  }
+/>
+`;

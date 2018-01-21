@@ -1,12 +1,10 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 import Table, { TableBody, TableCell, TableHead, TableRow, TableSortLabel } from 'material-ui/Table';
-
 import Typography from 'material-ui/Typography';
-import Button from 'material-ui/Button';
 import Dialog, { DialogTitle } from 'material-ui/Dialog';
 
-const BidsDialogComponentList = ({ classes, displayBids, orderBy, sortBidLabel, order, handleHeaderSort }) => (
+const BidsDialogComponentList = ({ classes, displayBids, orderBy, order, handleHeaderSort }) => (
     <div className={classes.demo}>
         <Table className={classes.table}>
             <TableHead className={classes.headerStyle}>
@@ -61,6 +59,14 @@ const BidsDialogComponentList = ({ classes, displayBids, orderBy, sortBidLabel, 
     </div >
 );
 
+BidsDialogComponentList.propTypes = {
+    classes: PropTypes.object.isRequired,
+    displayBids: PropTypes.array,
+    orderBy: PropTypes.string,
+    order: PropTypes.string,
+    handleHeaderSort: PropTypes.func
+};
+
 export default class BidsDialogComponent extends React.Component {
     state = {
         openBidsDialog: false,
@@ -91,7 +97,7 @@ export default class BidsDialogComponent extends React.Component {
             sortBidLabel,
             order: newOrder
         });
-        this.setState(prevState => ({
+        this.setState(() => ({
             order: newOrder,
             sortBidLabel,
             orderBy: sortBidLabel
@@ -125,4 +131,14 @@ export default class BidsDialogComponent extends React.Component {
         }
 
     }
+}
+
+BidsDialogComponent.propTypes = {
+    classes: PropTypes.object.isRequired,
+    sortBids: PropTypes.func,
+    displayBids: PropTypes.array,
+    sortBidLabel: PropTypes.string,
+    merchant: PropTypes.shape({
+        bids: PropTypes.array
+    })
 };
