@@ -6,7 +6,7 @@ exports[`should mount with bids 1`] = `
   <WithStyles(DialogContentText)
     className="BidsFormComponent-textField-5"
   >
-    Enter your bids 
+    Enter your bids
   </WithStyles(DialogContentText)>
   <div>
     <TextField
