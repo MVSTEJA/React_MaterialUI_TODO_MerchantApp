@@ -30,13 +30,17 @@ const styles = theme => {
             marginLeft: theme.spacing.unit,
             marginRight: theme.spacing.unit,
             width: 150,
+        },
+        checkBox: {
+            margin: 4,
+            paddingLeft: 0,
         }
     })
 };
 
 const EditMerchantDetailsModal = ({ props, state, handleEditFormSubmit, handleEditFormChange, handleCloseModal, handleBidsChange, classes }) => {
     const { merchantFormData } = props;
-    const { firstName, lastName, email, phone, id, hasPremium, bids } = merchantFormData;
+    const { firstName, lastName, email, phone, id, hasPremium, avatarUrl, bids } = merchantFormData;
     const { openEditModal, actionType, error } = state;
 
     return (
@@ -85,16 +89,28 @@ const EditMerchantDetailsModal = ({ props, state, handleEditFormSubmit, handleEd
                         onChange={handleEditFormChange}
                         className={classes.textInput}
                     />
+                    <TextField
+                        margin="normal"
+                        id="avatar-url"
+                        label="Avatar Url"
+                        type="text"
+                        value={avatarUrl}
+                        name="avatarUrl"
+                        onChange={handleEditFormChange}
+                        className={classes.textInput}
+                    />
                     <FormControl className={classes.textInput} error={error.editForm.Id} aria-describedby="name-error-text">
                         <InputLabel htmlFor="name-error">Id</InputLabel>
                         <Input id="name-error" type="text" name="id" value={id} onChange={handleEditFormChange} />
                         {error.editForm.Id && <FormHelperText id="name-error-text">{error.editForm.IdMessage}</FormHelperText>}
                     </FormControl>
                     <FormControlLabel
+                        className={classes.checkBox}
                         control={
                             <Checkbox
                                 checked={hasPremium}
                                 onChange={handleEditFormChange}
+                                name="hasPremium"
                                 value="hasPremium"
                             />
                         }

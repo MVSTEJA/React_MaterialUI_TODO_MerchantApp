@@ -34,10 +34,10 @@ const styles = theme => ({
         textAlign: 'center'
     },
     headerStyle: {
-        backgroundColor: theme.palette.secondary.light,
+        backgroundColor: theme.palette.primary.light,
     },
     columnTitle: {
-        color: 'black'
+        color: 'white'
     },
     demo: {
         margin: theme.spacing.unit,
@@ -57,18 +57,20 @@ const styles = theme => ({
     }
 });
 
+const baseErrorObject = {
+    editForm: {
+        Id: false,
+        IdMessage: ""
+    }
+};
+
 class MerchantTable extends React.Component {
     state = {
         openEditModal: false,
         openDeleteModal: false,
         page: 0,
         rowsPerPage: 5,
-        error: {
-            editForm: {
-                Id: false,
-                IdMessage: ""
-            }
-        },
+        error: ({ ...baseErrorObject }),
         merchantRowData: {}
     };
 
@@ -137,7 +139,8 @@ class MerchantTable extends React.Component {
         this.setState({
             openEditModal: true,
             actionType,
-            merchantRowData
+            merchantRowData,
+            error: ({ ...baseErrorObject })
         });
         this.props.selectMerchant(merchantRowData);
     };
@@ -174,7 +177,7 @@ class MerchantTable extends React.Component {
                             {`Click on 'Create Merchant' button to add a new user to table.`}
                         </Typography>
                     </label>
-                    <Button raised className={classes.button} onClick={this.toggleEditModal.bind(null, null)}>
+                    <Button dense raised className={classes.button} onClick={this.toggleEditModal.bind(null, null)}>
                         <Typography>Create Merchant</Typography>
                         <PersonAdd className={classes.buttonIcon} />
                     </Button>
@@ -192,6 +195,9 @@ class MerchantTable extends React.Component {
                         state={this.state}
                         handleDeleteModalData={this.handleDeleteModalData}
                         handleCloseModal={this.handleCloseModal} />
+                    <Typography type="display1" className={classes.button}>
+                        {`Merchant List Table.`}
+                    </Typography>
                     <MerchantTableComponent
                         classes={classes}
                         merchants={merchants}

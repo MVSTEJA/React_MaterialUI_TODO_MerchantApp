@@ -19,6 +19,7 @@ const BidsDialogComponentList = ({ classes, displayBids, orderBy, order, handleH
                         <TableSortLabel
                             active={orderBy === 'amount' ? true : false}
                             direction={order}
+                            className={classes.columnTitle}
                             onClick={handleHeaderSort.bind(null, 'amount', order)}
                         >
                             Amount
@@ -32,6 +33,7 @@ const BidsDialogComponentList = ({ classes, displayBids, orderBy, order, handleH
                         <TableSortLabel
                             active={orderBy === 'created' ? true : false}
                             direction={order}
+                            className={classes.columnTitle}
                             onClick={handleHeaderSort.bind(null, 'created', order)}
                         >
                             Created
@@ -39,22 +41,22 @@ const BidsDialogComponentList = ({ classes, displayBids, orderBy, order, handleH
                     </TableCell>
                 </TableRow>
             </TableHead>
-            <TableBody>
-                {
-                    displayBids.map((bid, key) =>
-                        <TableRow key={key}>
-                            <TableCell
-                            >{bid.id}</TableCell>
-                            <TableCell
-                            >{bid.carTitle}</TableCell>
-                            <TableCell
-                            >{bid.amount}</TableCell>
-                            <TableCell
-                            >{bid.created}</TableCell>
-                        </TableRow>
-                    )
-                }
-            </TableBody>
+        <TableBody>
+            {
+                displayBids.map((bid, key) =>
+                    <TableRow key={key}>
+                        <TableCell
+                        >{bid.id}</TableCell>
+                        <TableCell
+                        >{bid.carTitle}</TableCell>
+                        <TableCell
+                        >{bid.amount}</TableCell>
+                        <TableCell
+                        >{bid.created}</TableCell>
+                    </TableRow>
+                )
+            }
+        </TableBody>
         </Table>
     </div >
 );

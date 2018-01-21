@@ -5,6 +5,7 @@ import IconButton from 'material-ui/IconButton';
 import DeleteIcon from 'material-ui-icons/Delete';
 import EditIcon from 'material-ui-icons/Edit';
 import Typography from 'material-ui/Typography';
+import Avatar from 'material-ui/Avatar';
 
 import BidsDialogComponent from "./BidsDialogComponent";
 
@@ -13,42 +14,42 @@ const MerchantTableComponent = ({ classes, merchants, page, rowsPerPage, handleC
         <TableHead className={classes.headerStyle}>
             <TableRow>
                 <TableCell>
-                    <Typography type="body2" className={classes.title}>
+                    <Typography type="body2" className={classes.columnTitle}>
                         Merchant Name
                     </Typography>
                 </TableCell>
                 <TableCell numeric>
-                    <Typography type="body2" className={classes.title}>
+                    <Typography type="body2" className={classes.columnTitle}>
                         ID
                     </Typography>
                 </TableCell>
                 <TableCell numeric>
-                    <Typography type="body2" className={classes.title}>
+                    <Typography type="body2" className={classes.columnTitle}>
                         Avatar
                     </Typography>
                 </TableCell>
                 <TableCell numeric>
-                    <Typography type="body2" className={classes.title}>
+                    <Typography type="body2" className={classes.columnTitle}>
                         Email
                     </Typography>
                 </TableCell>
                 <TableCell numeric>
-                    <Typography type="body2" className={classes.title}>
+                    <Typography type="body2" className={classes.columnTitle}>
                         Phone
                     </Typography>
                 </TableCell>
                 <TableCell numeric>
-                    <Typography type="body2" className={classes.title}>
+                    <Typography type="body2" className={classes.columnTitle}>
                         HasPremium
                     </Typography>
                 </TableCell>
                 <TableCell numeric>
-                    <Typography type="body2" className={classes.title}>
+                    <Typography type="body2" className={classes.columnTitle}>
                         Bids
                     </Typography>
                 </TableCell>
                 <TableCell className={classes.actionsTitle}>
-                    <Typography type="body2" className={classes.title}>
+                    <Typography type="body2" className={classes.columnTitle}>
                         Actions
                     </Typography>
                 </TableCell>
@@ -60,7 +61,9 @@ const MerchantTableComponent = ({ classes, merchants, page, rowsPerPage, handleC
                     <TableRow key={merchant.id}>
                         <TableCell>{(merchant.firstName || merchant.lastName) && `${merchant.firstName} ${merchant.lastName}`}</TableCell>
                         <TableCell numeric>{merchant.id}</TableCell>
-                        <TableCell numeric>{merchant.avatarUrl}</TableCell>
+                        <TableCell numeric>
+                            <Avatar className={classes.avatar}>{merchant.avatarUrl[0]}</Avatar>
+                        </TableCell>
                         <TableCell numeric>{merchant.email}</TableCell>
                         <TableCell numeric>{merchant.phone}</TableCell>
                         <TableCell numeric>{merchant.hasPremium ? 'Yes' : 'No'}</TableCell>
