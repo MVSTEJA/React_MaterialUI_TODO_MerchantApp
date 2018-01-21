@@ -47,7 +47,7 @@ const EditMerchantDetailsModal = ({ props, state, handleEditFormSubmit, handleEd
     return (
         <Dialog open={openEditModal} onClose={handleCloseModal}>
             <form className={classes.container} onSubmit={handleEditFormSubmit.bind(null, actionType)} noValidate autoComplete="off">
-                <DialogTitle>Edit Merchant Details</DialogTitle>
+                <DialogTitle>{`${actionType === 'edit' ? 'Edit' : 'Create'} Merchant Details`}</DialogTitle>
                 <DialogContent>
                     <DialogContentText>Edit Merchant Details such as Email, First Name, Last Name and Phone Number</DialogContentText>
                     <TextField
