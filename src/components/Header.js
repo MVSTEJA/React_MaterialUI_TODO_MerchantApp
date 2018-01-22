@@ -26,7 +26,7 @@ const Header = ({ classes }) => (
             <Typography type="title" color="inherit" className={classes.flex}>
                 <img src={logo} className="App-logo" alt="logo" />
             </Typography>
-            <Button color="contrast">{Constants.LOGIN}</Button>
+            <Button className={classes.menuButton}>{Constants.LOGIN}</Button>
         </Toolbar>
     </AppBar>
 );
