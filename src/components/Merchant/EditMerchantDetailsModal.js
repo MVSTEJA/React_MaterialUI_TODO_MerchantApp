@@ -154,7 +154,16 @@ EditMerchantDetailsModal.propTypes = {
     handleEditFormSubmit: PropTypes.func,
     handleBidsChange: PropTypes.func,
     handleCloseModal: PropTypes.func,
-    merchantFormData: PropTypes.object
+    merchantFormData: PropTypes.shape({
+        firstName: PropTypes.string,
+        lastName: PropTypes.string,
+        email: PropTypes.string,
+        phone: PropTypes.string,
+        id: PropTypes.string,
+        hasPremium: PropTypes.bool,
+        avatarUrl: PropTypes.string,
+        bids: PropTypes.array
+    })
 };
 
 export default withStyles(styles)(EditMerchantDetailsModal);

@@ -41,64 +41,72 @@ const Constants = {
     ENTER_BIDS: 'Enter your bids'
 };
 
+/**
+ * @description: Component for each bid row.
+ */
+const RowBid = ({ bidsList, bid, currentRowKey, classes, handleBidsFormChange, handleBidsRowChange }) => (
+    <div>
+        <TextField
+            margin="normal"
+            id="amount"
+            label="Amount"
+            type="number"
+            name="amount"
+            value={bid.amount || ''}
+            onChange={handleBidsFormChange.bind(null, currentRowKey)}
+            className={classes.textInput}
+        />
+        <TextField
+            margin="normal"
+            id="created"
+            label="Created"
+            type="text"
+            name="created"
+            placeholder="mm-dd-yyyy"
+            value={bid.created}
+            onChange={handleBidsFormChange.bind(null, currentRowKey)}
+            className={classes.textInput}
+        />
+        <TextField
+            margin="normal"
+            id="car-title"
+            label="Car Title"
+            type="text"
+            value={bid.carTitle}
+            name="carTitle"
+            onChange={handleBidsFormChange.bind(null, currentRowKey)}
+            className={classes.textInput}
+        />
+        <TextField
+            margin="normal"
+            id="id"
+            label="Id"
+            type="text"
+            value={bid.id}
+            name="id"
+            onChange={handleBidsFormChange.bind(null, currentRowKey)}
+            className={classes.textInput}
+        />
+        {(bidsList.length - 1 === currentRowKey) && <IconButton
+            className={classes.button}
+            aria-label="Create Bid"
+            onClick={handleBidsRowChange.bind(null, bid, 'add')}
+        >
+            <AddCircle />
+        </IconButton>}
+        {(bidsList.length - 1 > 0) && <IconButton
+            className={classes.button}
+            aria-label="Delete Bid"
+            onClick={handleBidsRowChange.bind(null, bid, 'delete', currentRowKey)}
+        >
+            <DeleteIcon color="error" />
+        </IconButton>}
+    </div>
+);
+
 const generate = (bidsList, classes, handleBidsFormChange, handleBidsRowChange) => {
     return bidsList.map((bid, key) =>
-        <div key={key}>
-            <TextField
-                margin="normal"
-                id="amount"
-                label="Amount"
-                type="number"
-                name="amount"
-                value={bid.amount || ''}
-                onChange={handleBidsFormChange.bind(null, key)}
-                className={classes.textInput}
-            />
-            <TextField
-                margin="normal"
-                id="created"
-                label="Created"
-                type="text"
-                name="created"
-                value={bid.created}
-                onChange={handleBidsFormChange.bind(null, key)}
-                className={classes.textInput}
-            />
-            <TextField
-                margin="normal"
-                id="car-title"
-                label="Car Title"
-                type="text"
-                value={bid.carTitle}
-                name="carTitle"
-                onChange={handleBidsFormChange.bind(null, key)}
-                className={classes.textInput}
-            />
-            <TextField
-                margin="normal"
-                id="id"
-                label="Id"
-                type="text"
-                value={bid.id}
-                name="id"
-                onChange={handleBidsFormChange.bind(null, key)}
-                className={classes.textInput}
-            />
-            {(bidsList.length - 1 === key) && <IconButton
-                className={classes.button}
-                aria-label="Create Bid"
-                onClick={handleBidsRowChange.bind(null, bid, 'add')}
-            >
-                <AddCircle />
-            </IconButton>}
-            {(bidsList.length - 1 > 0) && <IconButton
-                className={classes.button}
-                aria-label="Delete Bid"
-                onClick={handleBidsRowChange.bind(null, bid, 'delete', key)}
-            >
-                <DeleteIcon color="error" />
-            </IconButton>}
-        </div>
+        <RowBid bidsList={bidsList} bid={bid} key={key} currentRowKey={key} classes={classes} handleBidsFormChange={handleBidsFormChange} handleBidsRowChange={handleBidsRowChange} />
     );
 }
 
@@ -153,7 +161,20 @@ class BidsFormComponent extends Component {
     }
 }
 
-export default withStyles(styles)(BidsFormComponent);
+RowBid.propTypes = {
+    bidsList: PropTypes.array,
+    bid: PropTypes.shape({
+        id: PropTypes.string,
+        carTitle: PropTypes.string,
+        amount: PropTypes.number,
+        created: PropTypes.string
+    }),
+    classes: PropTypes.object,
+    handleBidsFormChange: PropTypes.func,
+    handleBidsRowChange: PropTypes.func,
+    currentRowKey: PropTypes.number
+
+}
 
 BidsFormComponent.propTypes = {
     classes: PropTypes.object.isRequired,
@@ -161,3 +182,6 @@ BidsFormComponent.propTypes = {
     handleBidsChange: PropTypes.func,
     actionType: PropTypes.string
 };
+
+export default withStyles(styles)(BidsFormComponent);
+
