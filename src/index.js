@@ -15,13 +15,13 @@ const dataSet = [
     id: '1',
     carTitle: 'title1',
     amount: 1,
-    created: '01/01/01'
+    created: '01-01-01'
   },
   {
     id: '2',
     carTitle: 'title2',
     amount: 2,
-    created: '02/02/02'
+    created: '02-02-02'
   }]),
   createData('1', 'test21', 'test22', 'www.google.com', 'test22@test.com', 1234567892, true, []),
   createData('2', 'test31', 'test32', 'www.google.com', 'test33@test.com', 1234567893, false, []),
