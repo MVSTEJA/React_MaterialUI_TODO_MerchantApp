@@ -1,4 +1,4 @@
-import { ADD_MERCHANT, DELETE_MERCHANT, EDIT_MERCHANT_SUBMIT, EDIT_MERCHANT, SELECT_MERCHANT, MODIFY_BIDS, SORT_BIDS, DISPLAY_BIDS } from './actions/actionTypes';
+import { ADD_MERCHANT, DELETE_MERCHANT, EDIT_MERCHANT_SUBMIT, EDIT_MERCHANT, SELECT_MERCHANT, MODIFY_BIDS, SORT_BIDS, DISPLAY_BIDS, GET_MERCHANTS } from './actions/actionTypes';
 import { initialState } from './index';
 
 const checkEmptyBids = (state) => {
@@ -14,6 +14,14 @@ const checkEmptyBids = (state) => {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case GET_MERCHANTS: {
+      return {
+        ...state,
+        merchants: [...state.merchants, 
+          ...action.merchants,
+        ]
+      };
+    }
     case ADD_MERCHANT: {
 
       return {

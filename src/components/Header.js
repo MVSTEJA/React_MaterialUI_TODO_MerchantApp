@@ -24,7 +24,7 @@ const Header = ({ classes }) => (
                 <MenuIcon />
             </IconButton>
             <Typography type="title" color="inherit" className={classes.flex}>
-                <img src={logo} className="App-logo" alt="logo" />
+                {/* <img src={logo} className="App-logo" alt="logo" /> */}
             </Typography>
             <Button className={classes.menuButton}>{Constants.LOGIN}</Button>
         </Toolbar>

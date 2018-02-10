@@ -6,3 +6,4 @@ export const MODIFY_BIDS = "MODIFY_BIDS";
 export const EDIT_MERCHANT_SUBMIT = "EDIT_MERCHANT_SUBMIT";
 export const SORT_BIDS = "SORT_BIDS";
 export const DISPLAY_BIDS = "DISPLAY_BIDS";
+export const GET_MERCHANTS = "GET_MERCHANTS";

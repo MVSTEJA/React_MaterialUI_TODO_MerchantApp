@@ -94,7 +94,7 @@ const MerchantTableComponent = ({ classes, merchants, page, rowsPerPage, handleC
             </TableRow>
         </TableHead>
         <TableBody>
-            {merchants.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(merchant => {
+            {merchants.length > 0 && merchants.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(merchant => {
                 return (
                     <TableRow key={merchant.id}>
                         <TableCell>{(merchant.firstName || merchant.lastName) && `${merchant.firstName} ${merchant.lastName}`}</TableCell>

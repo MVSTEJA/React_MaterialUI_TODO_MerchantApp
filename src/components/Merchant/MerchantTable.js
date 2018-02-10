@@ -5,7 +5,7 @@ import Paper from 'material-ui/Paper';
 import { connect } from 'react-redux';
 import Typography from 'material-ui/Typography';
 
-import { deleteMerchant, selectMerchant, editMerchantSubmit, editMerchant, addMerchantSubmit, modifyBids, sortBids, handleDisplayBids } from './../../actions/merchantActions';
+import { deleteMerchant, selectMerchant, editMerchantSubmit, editMerchant, addMerchantSubmit, modifyBids, sortBids, handleDisplayBids, getMerchants } from './../../actions/merchantActions';
 import EditMerchantDetailsModal from "./EditMerchantDetailsModal";
 import DeleteMerchantDetailsModal from "./DeleteMerchantDetailsModal";
 import MerchantTableComponent, { CreateMerchantInfoSection } from "./MerchantTableComponent";
@@ -79,6 +79,9 @@ class MerchantTable extends React.Component {
         merchantRowData: {}
     };
 
+    componentWillMount(){
+        this.props.getMerchants();
+    }
     handleCloseModal = () => {
         this.setState({
             openEditModal: false,
@@ -174,6 +177,7 @@ class MerchantTable extends React.Component {
         const { classes, merchants } = this.props;
         const { page, rowsPerPage } = this.state;
 
+        console.log(merchants)
         return (
             <div>
                 <CreateMerchantInfoSection
@@ -242,6 +246,7 @@ const mapDispatchToProps = dispatch => ({
     selectMerchant: (name, value) => dispatch(selectMerchant(name, value)),
     modifyBids: bidFormData => dispatch(modifyBids(bidFormData)),
     handleDisplayBids: bids => dispatch(handleDisplayBids(bids)),
-    sortBids: (bids, sortBidData) => dispatch(sortBids(bids, sortBidData))
+    sortBids: (bids, sortBidData) => dispatch(sortBids(bids, sortBidData)),
+    getMerchants: merchants => dispatch(getMerchants(merchants))
 });
 export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(MerchantTable));

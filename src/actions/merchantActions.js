@@ -1,4 +1,4 @@
-import { ADD_MERCHANT, DELETE_MERCHANT, EDIT_MERCHANT, SELECT_MERCHANT, MODIFY_BIDS, EDIT_MERCHANT_SUBMIT, SORT_BIDS, DISPLAY_BIDS } from './actionTypes';
+import { ADD_MERCHANT, DELETE_MERCHANT, EDIT_MERCHANT, SELECT_MERCHANT, MODIFY_BIDS, EDIT_MERCHANT_SUBMIT, SORT_BIDS, DISPLAY_BIDS, GET_MERCHANTS } from './actionTypes';
 
 export const addMerchantSubmit = merchant => ({
   type: ADD_MERCHANT,
@@ -40,3 +40,13 @@ export const editMerchant = (propsName, propsValue) => ({
   propsName,
   propsValue,
 });
+
+export const getMerchants = (merchants = []) =>
+  async (dispatch, getstate) => {
+    const response = await fetch("https://www.mocky.io/v2/5a7f391c2e00005600b5688e");
+    const merchantsList = await response.json();
+    dispatch({
+      type: GET_MERCHANTS,
+      merchants: merchantsList
+    });
+  };
