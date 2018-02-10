@@ -43,10 +43,14 @@ export const editMerchant = (propsName, propsValue) => ({
 
 export const getMerchants = (merchants = []) =>
   async (dispatch, getstate) => {
-    const response = await fetch("https://www.mocky.io/v2/5a7f391c2e00005600b5688e");
-    const merchantsList = await response.json();
-    dispatch({
-      type: GET_MERCHANTS,
-      merchants: merchantsList
-    });
+    try {
+      const response = await fetch("https://www.mocky.io/v2/5a7f391c2e00005600b5688e");
+      const merchantsList = await response.json();
+      dispatch({
+        type: GET_MERCHANTS,
+        merchants: merchantsList
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
